@@ -929,7 +929,6 @@ C       192.168.1.4 is directly connected, FastEthernet1/2
 STEP2: VRF CONFIGURATION:
   virtual route forwarder: "Virtual/logical Router"
   allows you to have overlapping VPN networks
-
 R4:PE_a
 config t
  ip vrf clientBDOa
@@ -940,7 +939,11 @@ config t
    route-target 64999:2
  ip vrf clientPNBa
    rd 999:3
+route-target 64999:3
    route-target 64999:3 
+ip vrf clientEASTWESTbankA
+rd 666:666
+route-target 69666:4
    exit
 ***
 R1:pez
@@ -954,7 +957,11 @@ config t
  ip vrf clientPNBb
   rd 999:3
   route-target 64999:3
-  exit
+ip vrf clientEASTWESTbankB
+rd 666:666
+route-target 69666:4
+exit
+
 **********
 R4-PEa#show ip vrf
   Name                             Default RD          Interfaces
@@ -968,7 +975,6 @@ R1-PEz#show ip vrf
   clientBPIb                       999:2               
   clientPNBb                       999:3               
 SW3PEz#
-
 STEP3: CONFIGURING VRF INTERFACES ON PE ROUTERS:
 
 R4:PEa
